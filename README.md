@@ -1,7 +1,7 @@
 
-  # IT Company Website Design
+  # mrventure
 
-  This is a code bundle for IT Company Website Design. The original project is available at https://www.figma.com/design/AxUkZVwDyPFqPPxoScIXTm/IT-Company-Website-Design.
+  This is a code bundle for mrventure Website Design. The original project is available at https://www.figma.com/design/AxUkZVwDyPFqPPxoScIXTm/IT-Company-Website-Design.
 
   ## Running the code
 
