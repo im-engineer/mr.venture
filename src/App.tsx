@@ -12,6 +12,7 @@ import { BlogDetailPage } from './pages/BlogDetailPage';
 import { TechnologyPage } from './pages/TechnologyPage';
 import { ContactPage } from './pages/ContactPage';
 
+
 export type Route = {
   page: string;
   slug?: string;
