@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Header } from './components/Header';
+
 import { Footer } from './components/Footer';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { HomePage } from './pages/HomePage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
@@ -57,6 +59,7 @@ export default function App() {
     <div className="min-h-screen bg-slate-50">
       <Header currentPage={currentRoute.page} navigate={navigate} />
       <main>{renderPage()}</main>
+      <WhatsAppButton />
       <Footer navigate={navigate} />
     </div>
   );

@@ -1,5 +1,4 @@
 import { motion } from 'motion/react';
-import AES from 'crypto-js/aes';
 import { Mail, Phone, MapPin, Send, Clock, Globe, MessageCircle, Facebook, Twitter, Linkedin, Github, Instagram, Youtube } from 'lucide-react';
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
@@ -34,14 +33,9 @@ export function ContactPage() {
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-    const encryptionKey = import.meta.env.VITE_ENCRYPTION_KEY;
+    const email = import.meta.env.VITE_EMAIL;
+    const whatsapp = import.meta.env.VITE_WHATSAPP_NUMBER;
 
-    if (!encryptionKey) {
-      console.error('Encryption key is missing');
-      toast.error('System error: Encryption key missing');
-      setIsSending(false);
-      return;
-    }
 
     const serviceText = formData.service === 'custom' ? `Custom: ${formData.customService}` : formData.service;
 
@@ -52,7 +46,7 @@ export function ContactPage() {
       company: formData.company,
       phone: formData.phone,
       service: serviceText,
-      message: AES.encrypt(formData.message, encryptionKey).toString(),
+      message: formData.message,
       to_name: 'Admin',
     };
 
@@ -123,22 +117,22 @@ export function ContactPage() {
               {
                 icon: Mail,
                 title: 'Email Us',
-                info: 'contact@mrventure.io',
+                info: import.meta.env.VITE_EMAIL || 'contact@mrventure.io',
                 subInfo: 'We reply within 24 hours',
                 gradient: 'from-blue-500 to-cyan-500'
               },
               {
                 icon: Phone,
                 title: 'Call Us',
-                info: '+1 (555) 123-4567',
+                info: import.meta.env.VITE_WHATSAPP_NUMBER ? `+${import.meta.env.VITE_WHATSAPP_NUMBER}` : '+1 (555) 123-4567',
                 subInfo: 'Mon-Fri 9am-6pm EST',
                 gradient: 'from-emerald-500 to-teal-500'
               },
               {
                 icon: MapPin,
                 title: 'Visit Us',
-                info: 'San Francisco, CA',
-                subInfo: '123 Tech Street, Suite 100',
+                info: 'N/A',
+                subInfo: 'N/A',
                 gradient: 'from-purple-500 to-pink-500'
               },
               {
