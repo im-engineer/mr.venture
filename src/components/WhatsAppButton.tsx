@@ -8,6 +8,7 @@ export function WhatsAppButton() {
     const message = "Hello! I'm interested in your services.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
+
     return (
         <>
             <AnimatePresence>
