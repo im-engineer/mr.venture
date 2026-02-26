@@ -55,14 +55,11 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="py-24 bg-white relative overflow-hidden">
+    <section id="testimonials" className="py-24 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(79 70 229) 1px, transparent 0)`,
-          backgroundSize: '40px 40px',
-        }}></div>
-      </div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:30px_30px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+
+      <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[300px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -72,15 +69,15 @@ export function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full border border-indigo-200 mb-4">
-            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <div className="inline-flex items-center gap-2 px-4 py-2 glass-panel rounded-full border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.15)] mb-4">
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-medium">
               Testimonials
             </span>
           </div>
-          <h2 className="text-4xl lg:text-5xl bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">
-            Loved by Thousands of Companies
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+            Loved by Thousands of <span className="text-gradient">Companies</span>
           </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+          <p className="text-slate-300 max-w-2xl mx-auto text-lg leading-relaxed">
             See what our clients have to say about their experience with our solutions
           </p>
         </motion.div>
@@ -93,36 +90,39 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -8, boxShadow: '0 20px 40px -12px rgba(79, 70, 229, 0.2)' }}
-              className="bg-gradient-to-br from-white to-slate-50 p-8 rounded-2xl shadow-lg border border-slate-100 relative"
+              whileHover={{ y: -5 }}
+              className="glass-panel p-8 rounded-2xl shadow-lg relative group hover-glow transition-all"
             >
-              {/* Quote Icon */}
-              <div className="absolute top-6 right-6 w-12 h-12 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center opacity-50">
-                <Quote className="text-indigo-600" size={20} />
-              </div>
+              {/* Card Header: Rating & Quote Icon */}
+              <div className="flex justify-between items-start mb-6">
+                {/* Rating */}
+                <div className="flex gap-1 mt-1">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="text-yellow-400 fill-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" size={18} />
+                  ))}
+                </div>
 
-              {/* Rating */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="text-yellow-400 fill-yellow-400" size={18} />
-                ))}
+                {/* Quote Icon */}
+                <div className="w-10 h-10 glass-panel border border-white/5 rounded-full flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity shrink-0">
+                  <Quote className="text-blue-400" size={18} />
+                </div>
               </div>
 
               {/* Content */}
-              <p className="text-slate-700 mb-6 leading-relaxed">
+              <p className="text-slate-300 mb-6 leading-relaxed italic">
                 "{testimonial.content}"
               </p>
 
               {/* Author */}
-              <div className="flex items-center gap-4 pt-4 border-t border-slate-200">
+              <div className="flex items-center gap-4 pt-4 mt-auto">
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
-                  <div className="text-slate-900">{testimonial.name}</div>
-                  <div className="text-slate-500">{testimonial.role}</div>
+                  <div className="text-white font-medium">{testimonial.name}</div>
+                  <div className="text-blue-300 text-sm">{testimonial.role}</div>
                 </div>
               </div>
             </motion.div>

@@ -35,10 +35,17 @@ const comparisons = [
 
 export function ComparisonSection({ navigate }: ComparisonSectionProps) {
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-900 to-indigo-900 text-white relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-500 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+    <section className="py-24 bg-[#050812]/70 border-y border-white/5 text-white relative overflow-hidden">
+      {/* Centered Organic Gradient */}
+      <div className="absolute inset-0 -z-10 flex items-center justify-center pointer-events-none">
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, -45, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="w-[90vw] h-[70vh] max-w-[900px] max-h-[700px] bg-gradient-to-tr from-rose-500/50 via-fuchsia-500/50 to-purple-500/50 blur-[120px] rounded-[40%_60%_70%_30%]"
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -49,7 +56,7 @@ export function ComparisonSection({ navigate }: ComparisonSectionProps) {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl mb-4">Why Businesses Choose Us</h2>
-          <p className="text-indigo-200 text-lg max-w-2xl mx-auto">
+          <p className="text-orange-100 text-lg max-w-2xl mx-auto">
             See how we compare to traditional enterprise software providers
           </p>
         </motion.div>
@@ -58,10 +65,10 @@ export function ComparisonSection({ navigate }: ComparisonSectionProps) {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden border border-white/20"
+          className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden"
         >
           {/* Header */}
-          <div className="grid grid-cols-3 gap-4 p-6 border-b border-white/20">
+          <div className="grid grid-cols-3 gap-4 p-6">
             <div className="text-white/60">Feature</div>
             <div className="text-center text-white/60">Traditional Solutions</div>
             <div className="text-center">
@@ -79,7 +86,7 @@ export function ComparisonSection({ navigate }: ComparisonSectionProps) {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="grid grid-cols-3 gap-4 p-6 border-b border-white/10 last:border-0 hover:bg-white/5 transition-colors"
+              className="grid grid-cols-3 gap-4 p-6 last:border-0 hover:bg-white/5 transition-colors"
             >
               <div className="flex items-center">{item.feature}</div>
               <div className="flex items-center justify-center gap-2 text-red-400">
@@ -101,15 +108,15 @@ export function ComparisonSection({ navigate }: ComparisonSectionProps) {
           className="text-center mt-12"
         >
           <motion.button
-            whileHover={{ scale: 1.05, boxShadow: '0 20px 40px -12px rgba(255,255,255,0.3)' }}
+            whileHover={{ scale: 1.05, boxShadow: '0 20px 40px -12px rgba(249,115,22,0.4)' }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate('contact')}
-            className="px-8 py-4 bg-white text-indigo-600 rounded-xl shadow-xl inline-flex items-center gap-2"
+            className="px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.3)] inline-flex items-center gap-2 hover-glow"
           >
             Start Free Trial Today
             <ArrowRight size={20} />
           </motion.button>
-          <p className="text-indigo-200 mt-4">No credit card required • Free 30-day trial</p>
+          <p className="text-orange-200 mt-4">No credit card required • Free 30-day trial</p>
         </motion.div>
       </div>
     </section>

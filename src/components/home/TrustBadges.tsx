@@ -30,7 +30,7 @@ const badges = [
 
 export function TrustBadges() {
   return (
-    <section className="py-16 bg-white border-y border-slate-200">
+    <section className="py-16 bg-transparent border-y border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -38,7 +38,7 @@ export function TrustBadges() {
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <p className="text-slate-600">Trusted by industry leaders worldwide</p>
+          <p className="text-amber-100">Trusted by industry leaders worldwide</p>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -52,10 +52,10 @@ export function TrustBadges() {
               className="text-center"
             >
               <badge.icon className={`${badge.color} mx-auto mb-3`} size={32} />
-              <div className="text-3xl bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-1">
+              <div className="text-3xl text-white font-bold mb-1">
                 {badge.value}
               </div>
-              <div className="text-slate-600">{badge.label}</div>
+              <div className="text-amber-100">{badge.label}</div>
             </motion.div>
           ))}
         </div>

@@ -13,23 +13,19 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
 
   if (!service) {
     return (
-      <div className="pt-32 pb-24 text-center">
-        <h1>Service not found</h1>
-        <button onClick={() => navigate('services')} className="mt-4 text-indigo-600">
-          Back to Services
+      <div className="pt-32 pb-24 text-center min-h-screen bg-[#080b18] bg-[#080b18] flex flex-col justify-center items-center"> <h1 className="text-4xl text-white font-bold mb-4">Service Not Found</h1> <button onClick={() => navigate('services')} className="mt-4 text-blue-400 hover:text-blue-300 font-medium">
+          &larr; Back to Services
         </button>
       </div>
     );
   }
 
   return (
-    <div className="pt-20">
+    <div className="pt-20 min-h-screen bg-[#080b18] bg-[#080b18]">
       {/* Hero Section */}
-      <section className={`py-24 bg-gradient-to-br ${service.gradient} relative overflow-hidden`}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
+      <section className="py-24 relative overflow-hidden"> <div className="absolute inset-0">
+          <div className={`absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br ${service.gradient} rounded-full mix-blend-screen filter blur-[150px] opacity-20 animate-blob`}></div>
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_70%,transparent_100%)]"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -37,25 +33,27 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             onClick={() => navigate('services')}
-            className="flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors"
+            className="flex items-center gap-2 text-slate-400 hover:text-white mb-10 transition-colors font-medium"
           >
             <ArrowLeft size={20} />
             Back to Services
           </motion.button>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-white space-y-6"
+              className="text-white space-y-8"
             >
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl">
-                <service.icon size={40} />
+              <div className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br ${service.gradient} shadow-[0_0_30px_rgba(255,255,255,0.2)] rounded-2xl`}>
+                <service.icon size={40} className="text-white" />
               </div>
-              <h1 className="text-5xl lg:text-6xl">{service.title}</h1>
-              <p className="text-2xl text-white/90">{service.subtitle}</p>
-              <p className="text-xl text-white/80 leading-relaxed">
+              <div>
+                <h1 className="text-5xl lg:text-7xl font-bold mb-4 tracking-tight drop-shadow-sm">{service.title}</h1>
+                <p className={`text-2xl font-medium text-transparent bg-gradient-to-r ${service.gradient} bg-clip-text`}>{service.subtitle}</p>
+              </div>
+              <p className="text-xl text-slate-300 leading-relaxed font-light">
                 {service.description}
               </p>
 
@@ -64,14 +62,14 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => navigate('contact')}
-                  className="px-8 py-4 bg-white text-indigo-600 rounded-xl shadow-xl"
+                  className={`px-8 py-4 bg-gradient-to-br ${service.gradient} text-white rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] font-semibold text-lg transition-all hover-glow`}
                 >
                   Get Started
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 border-2 border-white text-white rounded-xl hover:bg-white/10 transition-colors"
+                  className="px-8 py-4 glass-panel text-white rounded-xl hover:bg-white/10 transition-colors font-semibold text-lg hover-glow"
                 >
                   Schedule Demo
                 </motion.button>
@@ -82,14 +80,16 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="relative"
+              className="relative group"
             >
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+              <div className={`absolute -inset-4 bg-gradient-to-br ${service.gradient} rounded-[2.5rem] blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 animate-pulse-glow`}></div>
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden glass-panel shadow-[0_0_40px_rgba(0,0,0,0.5)]">
                 <ImageWithFallback
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover opacity-80 mix-blend-lighten"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent"></div>
               </div>
             </motion.div>
           </div>
@@ -97,19 +97,17 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 relative"> <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">
-              Key Features
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6"> Key <span className="text-gradient">Features</span>
             </h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-              Everything you need to succeed, built into one powerful platform
+            <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed">
+              Everything you need to succeed, built into one powerful platform designed for maximum efficiency.
             </p>
           </motion.div>
 
@@ -121,11 +119,13 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                whileHover={{ y: -8, boxShadow: '0 20px 40px -12px rgba(0,0,0,0.15)' }}
-                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100"
+                whileHover={{ y: -5 }}
+                className="glass-panel p-6 rounded-2xl shadow-lg hover: transition-all hover-glow"
               >
-                <CheckCircle className={`text-green-600 mb-3`} size={24} />
-                <p className="text-slate-900">{feature}</p>
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${service.gradient} shadow-lg mb-4`}>
+                  <CheckCircle className="text-white" size={20} />
+                </div>
+                <p className="text-slate-200 font-medium tracking-wide">{feature}</p>
               </motion.div>
             ))}
           </div>
@@ -133,18 +133,16 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-50 to-indigo-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 relative"> <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none"></div> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">
-              Business Benefits
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6"> Business <span className="text-gradient">Benefits</span>
             </h2>
-            <p className="text-slate-600 text-lg">
+            <p className="text-slate-300 text-lg leading-relaxed">
               Measurable results that drive your business forward
             </p>
           </motion.div>
@@ -157,15 +155,12 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center"
+                className="text-center glass-panel p-8 rounded-2xl hover: transition-all group hover-glow"
               >
-                <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl mb-4`}>
-                  {index === 0 && <TrendingUp className="text-white" size={32} />}
-                  {index === 1 && <Shield className="text-white" size={32} />}
-                  {index === 2 && <Users className="text-white" size={32} />}
-                  {index === 3 && <Zap className="text-white" size={32} />}
+                <div className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br ${service.gradient} rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  {index === 0 && <TrendingUp className="text-white" size={36} />} {index === 1 && <Shield className="text-white" size={36} />} {index === 2 && <Users className="text-white" size={36} />} {index === 3 && <Zap className="text-white" size={36} />}
                 </div>
-                <p className="text-slate-700 text-lg">{benefit}</p>
+                <p className="text-slate-200 text-lg font-medium">{benefit}</p>
               </motion.div>
             ))}
           </div>
@@ -173,19 +168,17 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
       </section>
 
       {/* Technology Stack */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 relative"> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">
-              Technology Stack
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6"> Technology <span className="text-gradient">Stack</span>
             </h2>
-            <p className="text-slate-600 text-lg">
-              Built with industry-leading technologies
+            <p className="text-slate-300 text-lg leading-relaxed">
+              Built with industry-leading technologies for maximum performance
             </p>
           </motion.div>
 
@@ -198,7 +191,7 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 whileHover={{ scale: 1.1, y: -5 }}
-                className={`px-6 py-3 bg-gradient-to-br ${service.gradient} text-white rounded-xl shadow-lg`}
+                className={`px-8 py-4 glass-panel bg-gradient-to-r hover:from-white/10 hover:to-white/5 text-white font-medium rounded-xl shadow-lg cursor-default hover-glow`}
               >
                 {tech}
               </motion.div>
@@ -208,19 +201,17 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-50 to-indigo-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 relative"> <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 blur-[150px] rounded-full pointer-events-none"></div> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">
-              Flexible Pricing Plans
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6"> Flexible <span className="text-gradient">Pricing Plans</span>
             </h2>
-            <p className="text-slate-600 text-lg">
-              Choose the plan that fits your needs
+            <p className="text-slate-300 text-lg leading-relaxed">
+              Choose the plan that fits your scale and needs
             </p>
           </motion.div>
 
@@ -233,32 +224,34 @@ export function ServiceDetailPage({ slug, navigate }: ServiceDetailPageProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className={`bg-white p-8 rounded-2xl shadow-xl border-2 ${
-                  index === 1 ? `border-transparent bg-gradient-to-br ${service.gradient} text-white` : 'border-slate-200'
-                }`}
+                className={`glass-panel p-10 rounded-3xl shadow-2xl relative transition-all hover-glow group ${index === 1
+                    ? `border  bg-gradient-to-br from-white/10 to-transparent`
+                    : ' '
+                  }`}
               >
-                <div className="text-center space-y-4">
+                {index === 1 && (
+                  <div className={`absolute -inset-0.5 bg-gradient-to-br ${service.gradient} rounded-[1.6rem] blur opacity-20 group-hover:opacity-40 transition-opacity duration-300`}></div>
+                )}
+
+                <div className="relative z-10 text-center space-y-8">
                   {index === 1 && (
-                    <div className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 rounded-full">
-                      <Star className="text-yellow-300" size={16} />
-                      <span className="text-white">Popular</span>
+                    <div className="inline-flex items-center gap-1 px-4 py-1.5 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full border-yellow-400/30"> <Star className="text-yellow-400" size={16} /> <span className="text-yellow-200 font-medium text-sm tracking-wide uppercase">Popular</span>
                     </div>
                   )}
-                  <h3 className={`text-2xl capitalize ${index === 1 ? 'text-white' : 'text-slate-900'}`}>
+                  <h3 className={`text-2xl font-bold capitalize text-white tracking-wide`}>
                     {plan}
                   </h3>
-                  <div className={`text-4xl ${index === 1 ? 'text-white' : `bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent`}`}>
+                  <div className={`text-5xl font-bold ${index === 1 ? 'text-white drop-shadow-md' : `text-transparent bg-gradient-to-r ${service.gradient} bg-clip-text`}`}>
                     {price}
                   </div>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => navigate('contact')}
-                    className={`w-full px-6 py-3 rounded-xl transition-all ${
-                      index === 1
-                        ? 'bg-white text-indigo-600 hover:bg-gray-50'
-                        : `bg-gradient-to-r ${service.gradient} text-white hover:shadow-lg`
-                    }`}
+                    className={`w-full px-6 py-4 rounded-xl font-bold text-lg transition-all ${index === 1
+                        ? `bg-gradient-to-r ${service.gradient} text-white shadow-[0_0_20px_rgba(59,130,246,0.3)]   hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]`
+                        : 'bg-white/5   text-white hover:bg-white/10'
+                      }`}
                   >
                     Get Started
                   </motion.button>

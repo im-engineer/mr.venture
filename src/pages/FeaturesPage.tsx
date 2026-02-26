@@ -1,233 +1,133 @@
 import { motion } from 'motion/react';
-import { 
-  Shield, Zap, Users, Cloud, Lock, Headphones, Rocket, Database, 
-  Globe, Cpu, CheckCircle, Award, Smartphone, BarChart, GitBranch,
-  Layers, Workflow, Sparkles
+import {
+  Shield, Zap, Cloud, Database, Cpu, CheckCircle, Network, Layers, Sparkles
 } from 'lucide-react';
+import { MagnetCard } from '../components/MagnetCard';
 
-const featureCategories = [
+type FeaturesPageProps = {
+  navigate: (page: string, slug?: string) => void;
+};
+
+const features = [
   {
-    title: 'Core Features',
-    description: 'Essential capabilities built into every product',
-    features: [
-      {
-        icon: Zap,
-        title: 'Lightning Performance',
-        description: 'Optimized infrastructure delivering sub-second response times globally with advanced caching',
-        gradient: 'from-yellow-500 to-orange-500'
-      },
-      {
-        icon: Shield,
-        title: 'Enterprise Security',
-        description: 'Military-grade encryption with advanced threat detection and real-time monitoring',
-        gradient: 'from-blue-500 to-cyan-500'
-      },
-      {
-        icon: Cloud,
-        title: 'Cloud Native',
-        description: 'Built for the cloud with 99.99% uptime SLA and global CDN distribution',
-        gradient: 'from-indigo-500 to-blue-500'
-      },
-      {
-        icon: Database,
-        title: 'Real-time Sync',
-        description: 'Instant data synchronization across all devices and platforms',
-        gradient: 'from-emerald-500 to-teal-500'
-      }
-    ]
+    icon: Database,
+    title: 'Scalable Architecture',
+    description: 'We build systems capable of handling millions of concurrent requests seamlessly, utilizing horizontal scaling, specialized microservices, and load-balanced clusters.',
+    gradient: 'from-blue-500/20 to-cyan-500/20'
   },
   {
-    title: 'Advanced Capabilities',
-    description: 'Powerful features for enterprise needs',
-    features: [
-      {
-        icon: Cpu,
-        title: 'AI-Powered',
-        description: 'Machine learning algorithms that adapt and improve over time',
-        gradient: 'from-violet-500 to-purple-500'
-      },
-      {
-        icon: Users,
-        title: 'Unlimited Scaling',
-        description: 'Grow without limits with auto-scaling infrastructure and resources',
-        gradient: 'from-purple-500 to-pink-500'
-      },
-      {
-        icon: BarChart,
-        title: 'Advanced Analytics',
-        description: 'Comprehensive dashboards and reporting with predictive insights',
-        gradient: 'from-pink-500 to-rose-500'
-      },
-      {
-        icon: Workflow,
-        title: 'Automation Engine',
-        description: 'Powerful workflow automation to streamline your operations',
-        gradient: 'from-orange-500 to-red-500'
-      }
-    ]
+    icon: Shield,
+    title: 'Secure Systems',
+    description: 'Enterprise-grade data encryption, rigorous compliance standards, comprehensive role-based access control (RBAC), and automated threat detection built-in.',
+    gradient: 'from-purple-500/20 to-pink-500/20'
   },
   {
-    title: 'Integration & Support',
-    description: 'Connect and get help when you need it',
-    features: [
-      {
-        icon: GitBranch,
-        title: 'API Integration',
-        description: 'RESTful APIs and webhooks for seamless third-party integrations',
-        gradient: 'from-green-500 to-emerald-500'
-      },
-      {
-        icon: Layers,
-        title: 'Microservices',
-        description: 'Modular architecture for maximum flexibility and customization',
-        gradient: 'from-cyan-500 to-blue-500'
-      },
-      {
-        icon: Smartphone,
-        title: 'Mobile Ready',
-        description: 'Native mobile apps for iOS and Android with offline support',
-        gradient: 'from-blue-500 to-indigo-500'
-      },
-      {
-        icon: Headphones,
-        title: '24/7 Support',
-        description: 'Expert technical support available around the clock worldwide',
-        gradient: 'from-pink-500 to-rose-500'
-      }
-    ]
+    icon: Network,
+    title: 'API-First Development',
+    description: 'Robust REST and GraphQL APIs serve as the foundation of our platforms, enabling seamless third-party integrations, headless ecosystems, and mobile application support.',
+    gradient: 'from-emerald-500/20 to-teal-500/20'
   },
   {
-    title: 'Compliance & Quality',
-    description: 'Security and standards you can trust',
-    features: [
-      {
-        icon: Lock,
-        title: 'Data Privacy',
-        description: 'GDPR, HIPAA, and SOC 2 compliant with complete data ownership',
-        gradient: 'from-red-500 to-pink-500'
-      },
-      {
-        icon: Globe,
-        title: 'Global Reach',
-        description: 'Deployed across 50+ data centers in 6 continents',
-        gradient: 'from-cyan-500 to-blue-500'
-      },
-      {
-        icon: Rocket,
-        title: 'Rapid Deployment',
-        description: 'Go live in hours, not weeks, with our streamlined onboarding',
-        gradient: 'from-orange-500 to-red-500'
-      },
-      {
-        icon: Award,
-        title: 'Award Winning',
-        description: 'Recognized by industry leaders for innovation and excellence',
-        gradient: 'from-amber-500 to-yellow-500'
-      }
-    ]
+    icon: Cloud,
+    title: 'Cloud-Ready Infrastructure',
+    description: 'Deeply optimized for modern cloud deployments. We provision robust AWS ecosystems, highly available edge computing networks, and rapid Vercel serverless functions.',
+    gradient: 'from-fuchsia-500/20 to-rose-500/20'
+  },
+  {
+    icon: Zap,
+    title: 'Performance Optimization',
+    description: 'Blazing fast load speeds, sub-second query response times, edge caching, and minimized payload transfer guaranteed via obsessive performance tuning.',
+    gradient: 'from-amber-500/20 to-orange-500/20'
+  },
+  {
+    icon: Layers,
+    title: 'Modular Code Structure',
+    description: 'Maintainability is a priority. We formulate uncoupled, strongly-typed components facilitating effortless long-term growth and straightforward developer onboarding.',
+    gradient: 'from-indigo-500/20 to-blue-500/20'
   }
 ];
 
-export function FeaturesPage() {
+export function FeaturesPage({ navigate }: FeaturesPageProps) {
   return (
-    <div className="pt-20">
+    <div className="pt-20 min-h-screen bg-[#080b18]">
       {/* Hero Section */}
-      <section className="py-24 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-            backgroundSize: '50px 50px',
-          }}></div>
+      <section className="py-24 relative overflow-hidden">
+        {/* Centered Organic Gradient */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+          <motion.div
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [0, -45, 0],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="w-[80vw] h-[60vh] max-w-[800px] max-h-[600px] bg-gradient-to-tr from-blue-600/30 via-purple-600/30 to-cyan-500/30 blur-[130px] rounded-[40%_60%_70%_30%]"
+          />
         </div>
+
+        {/* Subtle Grid Overlay */}
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center text-white space-y-6"
+            className="text-center space-y-8"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 mb-4">
-              <Sparkles size={20} />
-              <span>Features</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 glass-panel rounded-full border-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.15)] mb-4">
+              <Cpu size={20} className="text-cyan-400" />
+              <span className="text-cyan-200 font-medium tracking-wide">MR Venture Engineering</span>
             </div>
-            <h1 className="text-5xl lg:text-6xl">Everything You Need to Succeed</h1>
-            <p className="text-xl text-indigo-100 max-w-3xl mx-auto">
-              Comprehensive features designed to empower your business and drive innovation
+            <h1 className="text-5xl lg:text-7xl font-bold text-white tracking-tight">
+              Technical <span style={{ backgroundImage: 'linear-gradient(to right, #22d3ee, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', color: 'transparent' }}>Features</span>
+            </h1>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              We focus heavily on creating scalable architecture, secure systems, and highly performant platforms. Quality is engineered into everything we build.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Features Categories */}
-      {featureCategories.map((category, categoryIndex) => (
-        <section
-          key={category.title}
-          className={categoryIndex % 2 === 0 ? 'py-24 bg-white' : 'py-24 bg-gradient-to-br from-slate-50 to-indigo-50'}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-4">
-                {category.title}
-              </h2>
-              <p className="text-slate-600 text-lg">
-                {category.description}
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {category.features.map((feature, index) => (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  whileHover={{ y: -8, boxShadow: '0 20px 40px -12px rgba(0,0,0,0.15)' }}
-                  className="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 relative overflow-hidden"
-                >
-                  {/* Gradient overlay on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity`}></div>
-
-                  <div className="relative z-10">
-                    <motion.div
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                      className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${feature.gradient} shadow-lg mb-4`}
-                    >
-                      <feature.icon className="text-white" size={24} />
-                    </motion.div>
-
-                    <h3 className="text-slate-900 mb-3">
-                      {feature.title}
-                    </h3>
-
-                    <p className="text-slate-600 leading-relaxed">
-                      {feature.description}
-                    </p>
+      {/* Primary Features Grid using MagnetCards */}
+      <section className="py-24 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="h-full"
+              >
+                <MagnetCard gradientColors={feature.gradient} className="h-full p-8 flex flex-col items-start bg-[#0a0f1c]/60 backdrop-blur-md">
+                  <div className={`w-14 h-14 rounded-xl bg-dark-800 border border-white/10 flex items-center justify-center mb-6 shadow-inner pointer-events-none`}>
+                    <feature.icon className="text-white" size={28} />
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                  <h3 className="text-xl font-bold text-white mb-4 tracking-wide">
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-400 leading-relaxed font-medium">
+                    {feature.description}
+                  </p>
+                </MagnetCard>
+              </motion.div>
+            ))}
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
-      {/* Stats Section */}
-      <section className="py-24 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 text-center text-white">
+      {/* Animated Stats Section */}
+      <section className="py-24 relative overflow-hidden border-y border-white/5 bg-[#050812]/50">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_80%,transparent_100%)] pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-3 gap-8 text-center max-w-4xl mx-auto">
             {[
-              { value: '99.99%', label: 'Uptime SLA' },
-              { value: '< 100ms', label: 'Response Time' },
-              { value: '256-bit', label: 'Encryption' },
-              { value: '24/7', label: 'Support' }
+              { value: '85+', label: 'Projects Delivered', color: 'text-cyan-400', drop: 'drop-shadow-[0_0_15px_rgba(34,211,238,0.4)]' },
+              { value: '99%', label: 'Client Satisfaction', color: 'text-purple-400', drop: 'drop-shadow-[0_0_15px_rgba(168,85,247,0.4)]' },
+              { value: '5+', label: 'Years Experience', color: 'text-blue-400', drop: 'drop-shadow-[0_0_15px_rgba(59,130,246,0.4)]' }
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -235,38 +135,47 @@ export function FeaturesPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="glass-panel p-8 rounded-3xl hover-glow group transition-all duration-300"
               >
-                <div className="text-5xl mb-2">{stat.value}</div>
-                <div className="text-indigo-100">{stat.label}</div>
+                <div className={`text-5xl md:text-6xl font-extrabold ${stat.color} mb-3 ${stat.drop} transition-all`}>
+                  {stat.value}
+                </div>
+                <div className="text-slate-300 font-semibold tracking-wider text-sm uppercase">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Final CTA Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-cyan-600/10 blur-[150px] rounded-full pointer-events-none"></div>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-8 glass-panel border border-white/10 p-8 md:p-12 rounded-3xl hover-glow transition-all"
           >
-            <h2 className="text-4xl bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              Experience All Features
+            <h2 className="text-4xl lg:text-5xl font-bold text-white tracking-tight">
+              Scale Your Business with <span style={{ backgroundImage: 'linear-gradient(to right, #22d3ee, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', color: 'transparent' }}>Technology</span>
             </h2>
-            <p className="text-slate-600 text-lg">
-              Start your free trial today and explore everything our platform has to offer
+            <p className="text-slate-300 text-lg leading-relaxed max-w-2xl mx-auto">
+              Our engineering foundation ensures your platform is secure, flawlessly performant, and ready to scale effortlessly.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: '0 20px 40px -12px rgba(79, 70, 229, 0.4)' }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg inline-flex items-center gap-2"
-            >
-              <CheckCircle size={20} />
-              Start Free Trial
-            </motion.button>
+            <div className="flex justify-center">
+              <motion.button
+                onClick={() => navigate('contact')}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-10 py-5 bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] inline-flex items-center gap-3 transition-all hover-glow text-lg"
+              >
+                <Sparkles size={22} className="text-cyan-200" />
+                Contact Our Team
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </section>

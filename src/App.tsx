@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Header } from './components/Header';
-
 import { Footer } from './components/Footer';
-import { WhatsAppButton } from './components/WhatsAppButton';
 import { HomePage } from './pages/HomePage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
@@ -13,7 +11,7 @@ import { BlogPage } from './pages/BlogPage';
 import { BlogDetailPage } from './pages/BlogDetailPage';
 import { TechnologyPage } from './pages/TechnologyPage';
 import { ContactPage } from './pages/ContactPage';
-
+import { FloatingWidgets } from './components/FloatingWidgets';
 
 export type Route = {
   page: string;
@@ -41,13 +39,13 @@ export default function App() {
       case 'product-detail':
         return <ProductDetailPage slug={currentRoute.slug!} navigate={navigate} />;
       case 'features':
-        return <FeaturesPage />;
+        return <FeaturesPage navigate={navigate} />;
       case 'blog':
         return <BlogPage navigate={navigate} />;
       case 'blog-detail':
         return <BlogDetailPage slug={currentRoute.slug!} navigate={navigate} />;
       case 'technology':
-        return <TechnologyPage />;
+        return <TechnologyPage navigate={navigate} />;
       case 'contact':
         return <ContactPage />;
       default:
@@ -56,11 +54,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen text-slate-100 font-sans selection:bg-indigo-500/30">
       <Header currentPage={currentRoute.page} navigate={navigate} />
       <main>{renderPage()}</main>
-      <WhatsAppButton />
       <Footer navigate={navigate} />
+      <FloatingWidgets />
     </div>
   );
 }

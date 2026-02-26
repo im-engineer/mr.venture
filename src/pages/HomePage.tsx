@@ -4,6 +4,7 @@ import { ServicesPreview } from '../components/home/ServicesPreview';
 import { FeaturesPreview } from '../components/home/FeaturesPreview';
 import { Testimonials } from '../components/Testimonials';
 import { TrustBadges } from '../components/home/TrustBadges';
+import { AboutMRVenture } from '../components/home/AboutMRVenture';
 import { ComparisonSection } from '../components/home/ComparisonSection';
 import { LiveDemo } from '../components/home/LiveDemo';
 import { CTA } from '../components/CTA';
@@ -17,6 +18,7 @@ export function HomePage({ navigate }: HomePageProps) {
     <div>
       <Hero navigate={navigate} />
       <TrustBadges />
+      <AboutMRVenture />
       <Stats />
       <ServicesPreview navigate={navigate} />
       <ComparisonSection navigate={navigate} />
